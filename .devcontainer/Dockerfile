@@ -1,12 +1,18 @@
 FROM mcr.microsoft.com/vscode/devcontainers/base:bullseye
 
-RUN apt-get update && \
-  apt-get install -y curl unzip
+ENV DENO_INSTALL=/deno
+RUN mkdir -p /deno \
+    && curl -fsSL https://deno.land/x/install/install.sh | sh \
+    && chown -R vscode /deno
 
-RUN curl -fsSL https://deno.land/x/install/install.sh | sh
+ENV PATH=${DENO_INSTALL}/bin:${PATH} \
+    DENO_DIR=${DENO_INSTALL}/.cache/deno
 
-WORKDIR /workspace
+WORKDIR /workspaces
 
 EXPOSE 8080
+
+RUN apt-get update && \
+  apt-get install -y fish
 
 USER vscode
