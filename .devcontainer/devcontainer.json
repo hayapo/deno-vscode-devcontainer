@@ -1,0 +1,25 @@
+{
+  "name": "Deno VScode DevContainer",
+  "build": {
+    "dockerFile": "Dockerfile",
+    "args": {}
+  },
+  
+  // コンテナ起動時に実行されるタスク（任意）
+  "runArgs": [
+    // write your task 
+    // example ↓
+    // "--init", "--network", "host"
+  ],
+  
+  "remoteUser": "vscode",
+  "forwardPorts": [8080],
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "denoland.vscode-deno"
+      ]
+    }
+  }
+}
